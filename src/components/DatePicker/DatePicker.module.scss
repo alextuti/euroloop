@@ -1,0 +1,78 @@
+@import '../../styles/variables.module.scss';
+
+.DatePicker{
+    width: 100%;
+    background: $light-color;
+    display: grid;
+    grid-template-rows: 75px 50px 280px;
+    z-index: 1200;
+    position: relative;
+    margin: 0 auto;
+    .Header{
+        display: grid;
+        grid-template-columns: 1fr 2fr 1fr;
+
+        .Title{
+            margin: auto;
+            font-size: $medium-font;
+            color: $primary-color;
+            align-self: center;
+        }
+
+        button{
+            justify-self: center;
+            align-self: center;
+            margin: auto;
+            img{
+                width: 25px;
+                height: 25px;
+            }
+        }
+    }
+
+    .WeekDaysList{
+        color: $primary-color;
+        list-style: none;
+        display: grid;
+        grid-template-columns: repeat(7, 1fr);
+        grid-column-gap: 2px;
+        margin: 0;
+        padding: 0;
+    
+        li{
+            margin: 0 auto;
+        }
+    }
+
+    .DaysContainer{
+        display: grid;
+        grid-template-columns: repeat(7, 1fr);
+        grid-template-rows: repeat(6, 1fr);
+        grid-gap: 2px;
+
+        button{
+            margin: auto auto;
+            font-size: $large-font;
+            padding: 5px;
+            line-height: $large-font;
+            align-self: center;
+            &:focus{
+                width: 40px;
+                height: 40px;
+                background: $primary-color;
+                color: $light-color;
+                border-radius: $border-radius;
+            }
+        }
+
+    }
+
+}
+
+
+
+
+
+
+
+

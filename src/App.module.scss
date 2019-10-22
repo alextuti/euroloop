@@ -1,0 +1,13 @@
+@font-face {
+    font-family: SpaceGrotesk;
+    src: url('./SpaceGrotesk-Regular.woff');
+}
+
+*{
+    font-family: SpaceGrotesk;
+}
+
+.App{
+    display: grid;
+    grid-template-rows: 100px 1fr;
+}

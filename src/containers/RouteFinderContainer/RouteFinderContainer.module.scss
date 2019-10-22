@@ -1,0 +1,41 @@
+@import '../../styles/variables.module.scss';
+
+.RouteFinderContainer{
+    position: relative;
+    margin: auto;
+    width: 100%;
+    height: auto;
+    z-index: 1000;
+    background: $secondary-color;
+    display: grid;
+    grid-template-columns: 15px 1fr 1fr 15px;
+    grid-template-rows: 40px 1fr 1fr 1fr 1fr 1fr;
+    grid-template-areas: 
+        ". . . ."
+        ". departure-input departure-input ."
+        ". arrival-input arrival-input ."
+        ". one-way-return passenger-count ."
+        ". departure-date return-date ."
+        ". search-button search-button .";
+    row-gap: 10px;
+
+    @media screen and (min-width: $tablet-bp){
+        width: 768px;
+        border-radius: $border-radius;
+        box-shadow: $shadow;
+    }
+
+    @media screen and (min-width: $computer-small-bp){
+        width: 85%;
+        grid-template-columns: 15px 1.75fr 1.75fr 1fr 1fr 15px;
+        grid-template-rows: 40px 1fr 1fr;
+        grid-template-areas: 
+            ". . . . . ."
+            ". departure-input arrival-input one-way-return passenger-count ."
+            ". departure-date return-date search-button search-button .";
+        row-gap: 0;
+        column-gap: 15px;
+    }
+}
+
+

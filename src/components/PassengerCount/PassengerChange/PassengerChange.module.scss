@@ -1,0 +1,70 @@
+@import '../../../styles/variables.module.scss';
+
+.PassengerChange{
+    position: fixed;
+    z-index: 1900;
+    left: 0;
+    top: 0;
+    display: flex;
+    width: 100%;
+    height: 100vh;
+    flex-direction: column;
+    justify-content: flex-start;
+    background: $light-color;
+    box-shadow: $shadow;
+    border-radius: $border-radius;
+
+    .PassengerChangeBody{
+        display: grid;
+        grid-template-columns: 1fr 100px 1fr;
+        column-gap: 1fr;
+        grid-template-rows: repeat(3, 55px);
+        span{
+            align-self: center;
+            justify-self: start;
+            font-weight: bold;
+            margin: 0;
+            color: $primary-color;
+        }
+    }
+
+    .PassengerChangeHead{
+        background: $light-color;
+        color: $primary-color;
+        display: grid;
+        height: 50px;
+        grid-template-columns: 20px 150px;
+        gap: calc(50% - 75px);
+        box-shadow: $shadow;
+        
+        span{
+            line-height: 50px;
+            font-size: $medium-font;
+            font-weight: bold;
+        }
+        .PassengerChangeCancel{
+            font-size: 40px;
+        }
+
+        @media screen and (min-width: $computer-small-bp){
+            display: none;
+        }
+
+    }
+
+    button{
+        margin: 0 auto;
+        font-size: $large-font;
+        font-weight: bold;
+        line-height: 35px;
+    }
+
+    @media screen and (min-width: $computer-small-bp){
+        width: 200px;
+        height: 215px;
+        border-radius: $border-radius;
+        box-shadow: $shadow;
+        top: 170px;
+        left: unset;
+    }
+}

@@ -1,0 +1,21 @@
+@import '../../styles/variables.module.scss';
+
+.NavigationBar{
+    background: $light-color;
+    height: 100px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 900;
+    position: sticky;
+    
+    span{
+        background: $primary-color;
+        color: $light-color;
+        font-size: $large-font;
+        font-weight: bold;
+        padding: 0 5px;
+        border-top-right-radius: 50px;
+        border-bottom-left-radius: 25px;
+    }
+}
