@@ -1,12 +1,6 @@
 @import '../../../styles/variables.module.scss';
 
 .Button{
-    // font-weight: bold;
-    // border: 0;
-    // background: $light-color;
-    // width: 100vw;
-    // border-radius: 0;
-    // z-index: 1300;
     box-sizing: border-box;
     color: $primary-color;
     border: none;
@@ -35,12 +29,21 @@
     border: none;
     box-shadow: none;
 
+    &:disabled{
+        color: grey;
+    }
+
+    &:disabled > img{
+        opacity: 0.5;
+    }
+
     &:focus {
         outline: none;
     }
+
     &::selection {
         outline: none;
-    } 
+    }
 }
 
 .Confirm{

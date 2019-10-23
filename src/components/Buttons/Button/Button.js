@@ -5,7 +5,7 @@ class Button extends Component{
 
     render(){
 
-        // Assigning classes to Button based on different conditions 
+        // Assigning classes to Button based on the button type 
         let buttonClasses = [classes.Button, classes[this.props.btnType]];
 
         return(
@@ -14,7 +14,6 @@ class Button extends Component{
                 onClick={this.props.clicked}
                 type={this.props.type} 
                 disabled={this.props.disabled}
-                autoFocus={this.props.focus}
                 id={this.props.id}
                 role={this.props.role}
                 aria-label={this.props.ariaLabel}

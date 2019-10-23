@@ -67,16 +67,18 @@ class PassengerChange extends Component{
                 role="dialog"
                 aria-label="Passenger change box"
                 style={{
-                    // transform: this.props.buttonClicked ? 'translateY(0)' : 'translateY(-100vh)',
-                    // opacity: this.props.buttonClicked ? '1':'0'
                     display: this.props.buttonClicked ? 'block' : 'none'
                 }}>
+
+                {/* The upper part used for mobile/tablets */}
                 <section className={classes.PassengerChangeHead}>
                         <span
                             className={classes.PassengerChangeCancel} 
                             onClick={this.passengerChangeCancelHandler}>{"<"}</span>
                         <span>Passengers</span>
                 </section>
+
+                {/* The container that holds the increase/decrease buttons for different type of passengers */}
                 <section
                     className={classes.PassengerChangeBody}>
                     <Button
@@ -131,6 +133,8 @@ class PassengerChange extends Component{
                     confirmed={this.state.confirmed}
                     disabled={this.state.adultsCount === 0}
                     show>CONFIRM</Button>
+
+                {/* For accessibility purposes, this status paragraph informs the user of the current number of passengers */}
                 <p
                     role="status"
                     style={{
@@ -143,6 +147,8 @@ class PassengerChange extends Component{
                             ${this.state.infantsCount} ${this.state.infantsCount === 1 ? 'Infant' : 'Infants'}`
                         }
                 </p>
+
+                {/* Inputs that hold the current values and can be accessed through the form data */}
                 <Input 
                     elementType="hidden"
                     name="adultsCount"

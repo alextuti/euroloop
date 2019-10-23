@@ -10,6 +10,8 @@
     display: grid;
     grid-template-columns: 15px 1fr 1fr 15px;
     grid-template-rows: 40px 1fr 1fr 1fr 1fr 1fr;
+
+    // The container layout
     grid-template-areas: 
         ". . . ."
         ". departure-input departure-input ."

@@ -27,11 +27,14 @@ class DatePicker extends Component{
     dateClickedHandler = (e, date) =>{
         e.preventDefault();
         this.setState({clickedDate: date });
+
+        //Selected date is sent to the DateInput component
         this.props.getSelectedDate(date.toLocaleString('en-GB', {day: 'numeric', month: 'numeric', year: 'numeric'}));
     }
 
 
     render(){
+        // Getting the needed date variables that help auto-generate new calendar days/months/years
         let currentMonth = this.state.currentDate.toLocaleString('default', {month: 'long'});
         let currentYear = this.state.currentDate.toLocaleString('default', {year: 'numeric'});
         let nextMonth = new Date(this.state.currentDate.getFullYear(), this.state.currentDate.getMonth() + 1, 1);
@@ -39,10 +42,12 @@ class DatePicker extends Component{
         let firstDay = new Date(this.state.currentDate.getFullYear(), this.state.currentDate.getMonth(), 1).getDay() === 0 ? 7: new Date(this.state.currentDate.getFullYear(), this.state.currentDate.getMonth(), 1).getDay();
         let lastDay = new Date(this.state.currentDate.getFullYear(), this.state.currentDate.getMonth()+1, -1).getDate()
 
+        // Get the date format for a given day of the month
         const getCurrentDate = (day) =>{
             return new Date(this.state.currentDate.getFullYear(), this.state.currentDate.getMonth(), day);
         }
 
+        // Get the day of the week for a given date
         const getWeekDay = (day) =>{
             let weekdays = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
             let weekDayNumber = new Date(this.state.currentDate.getFullYear(), this.state.currentDate.getMonth(), day - 1).getDay();
@@ -66,13 +71,18 @@ class DatePicker extends Component{
                     // The key is the date itself as there are no two identical dates possible
                     key: getCurrentDate(currentDay),
                     dayNumber: currentDay,
-                    disabled: false,
+                    // The dates before TODAY are disabled
+                    disabled: 
+                        getCurrentDate(currentDay).getMonth() === new Date().getMonth() &&
+                        getCurrentDate(currentDay).getFullYear() === new Date().getFullYear() &&
+                        getCurrentDate(currentDay).getDate() < new Date().getDate(),
                     ariaHidden: false,
                     ariaLabel: `${currentDay}, ${getWeekDay(currentDay)} ${currentMonth + ' ' + currentYear}`
                 })
             }
         }
         
+        // The calendar elements that hold the days of the month
         let calendarDays = calendarDaysArray.map(element => {
                 return <Button 
                 btnType="Customizable"
@@ -81,7 +91,6 @@ class DatePicker extends Component{
                 disabled={element.disabled}
                 ariaHidden={element.ariaHidden}
                 ariaLabel={element.ariaLabel}
-                focus={this.props.confirmedDate === element.key.toLocaleString('en-GB', {day: 'numeric', month: 'numeric', year: 'numeric'})}
                 show>{element.dayNumber}</Button>
         });   
 
@@ -96,6 +105,11 @@ class DatePicker extends Component{
                         btnType="Customizable"
                         clicked={this.monthBackHandler}
                         type="button"
+                        // The month layouts for the months before the current one cannot be accessed
+                        disabled={
+                            currentMonth + currentYear ===
+                            new Date().toLocaleString('default', {month: 'long'}) + new Date().toLocaleString('default', {year: 'numeric'})
+                        }
                         ariaLabel={"Previous month, " + previousMonth.toLocaleString('default', {month: 'long'}) + ' ' + previousMonth.toLocaleString('default', {year: 'numeric'})}
                         show><img src={arrow} style={{transform: 'rotate(180deg)'}} alt="arrow left"></img></Button>
                     <header 

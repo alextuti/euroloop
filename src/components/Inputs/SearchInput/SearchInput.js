@@ -18,22 +18,32 @@ class SearchInput extends Component{
         let searchText = null;
 
         searchText = e.target.value;
+
+        // Get the stations from the JSON file
         const stations = hyperloopRoutes.map(element => element["City"]);
+
+        // Populate the suggestions array with the matching elements from the stations array
         if(searchText.length > 0){
             suggestions = stations.filter(station => {
                 const regex = new RegExp(`^${searchText}`, 'gi');
+                
+                // oppositeValue means the value from the other search input (ex. for Arrival -> Return is the opposite)
+                // This is done so the arrival and return stations cannot be the same
                 return this.props.oppositeValue !== station && station.match(regex);
             })
         }
             
-        
+        // Update the suggestions and input status/value
         this.setState({suggestions: suggestions, onChange: suggestions.length > 0, inputValue: searchText});
+
+        // Send the value of the opposite input to each other
         if(this.state.inputValue){
             this.props.id === 'departure' ? 
             this.props.sendDepartureInputValue(searchText) : this.props.sendArrivalInputValue(searchText);
         }
     }
 
+    // When suggestion is clicked, the input value changes to the value of the clicked suggestion
     suggestionClickedHandler = (suggestion) =>{
         this.setState({inputValue: suggestion, onChange: false, suggestions: []});
         if(this.state.inputValue){
@@ -44,6 +54,8 @@ class SearchInput extends Component{
 
     renderSuggestions = () =>{
         const suggestions = this.state.suggestions;
+        
+        // Verify that the suggestion list is not empty and the status is onChange
         if(suggestions.length > 0 && this.state.onChange){
             return (
                 <ul 
@@ -85,6 +97,7 @@ class SearchInput extends Component{
                 aria-controls={"recommendationList" + this.props.id}
                 aria-expanded={this.state.onChange}
                 style={{
+                    // The layout of the combobox based on the device used
                     position: this.state.onChange && window.screen.width < 1024 ? 'fixed' : 'relative',
                     top: this.state.onChange && window.screen.width < 1024 ? '0' : 'initial',
                     zIndex: this.state.onChange && window.screen.width < 1024 ? '2500' : 'initial'
@@ -105,6 +118,7 @@ class SearchInput extends Component{
                     aria-autocomplete="list"
                     aria-activedescendant="suggestionsOption0"
                     style={{
+                        // The aspect of the input box based on the device used
                         borderRadius: this.state.onChange && window.screen.width < 1024 ? '0' : '6px',
                         borderBottomLeftRadius: this.state.onChange ? '0px': '6px',
                         borderBottomRightRadius:this.state.onChange ? '0px': '6px',

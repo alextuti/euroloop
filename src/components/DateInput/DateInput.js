@@ -29,6 +29,7 @@ class DateInput extends Component{
         this.setState({currentDate: selectedDate});
     }
 
+    // Get the selected date and display it on the read-only input upon clicking on CONFIRM button
     confirmDateHandler = (e) =>{
         e.preventDefault();
         if(this.state.currentDate){
@@ -52,6 +53,8 @@ class DateInput extends Component{
                 style={{
                     opacity: this.props.show ? '1' : '0'
                 }}>
+
+                {/* The read-only input that holds the chosen date and gives access to the calendar widget */}
                 <Input 
                     elementType="text"
                     name={this.props.for + 'Date'}
@@ -61,25 +64,30 @@ class DateInput extends Component{
                     show={this.props.show}
                     textPosition="RightAlignedText"
                     position={this.props.position}
-                    ariaHidden={!this.props.show}
                     tabIndex={this.props.show ? '0' : '-1'}
-                    ariaLabel={`Current ${this.props.for} date: ${this.state.confirmedDateRaw.toLocaleString('en-GB', {year: 'numeric', month: 'long', day: 'numeric'})}, open to change`}
+                    ariaHidden={!this.props.show}
+                    ariaLabel={`Current ${this.props.for} date: 
+                        ${this.state.confirmedDateRaw.toLocaleString('en-GB', {year: 'numeric', month: 'long', day: 'numeric'})}, open to change`
+                    }
                     icon="Calendar" />
+                    
+                {/* The container that holds the date picker and the other functionality buttons */}
                 <section 
                     className={classes.DatePickerContainer}
                     role="presentation"
                     aria-hidden={!this.props.show}
                     style={{
-                        // transform: this.state.inputClicked ? 'translateY(0)' : 'translateY(-180vh)',
-                        // opacity: this.state.inputClicked ? '1':'0'
                         display: this.state.inputClicked ? 'block' : 'none'
                     }}>
+
+                    {/* Upper part of the calendar used for mobiles/tablets */}
                     <section className={classes.DatePickerHead}>
                         <span
                             className={classes.DatePickerCancel} 
                             onClick={this.cancelButtonHandler}>{"<"}</span>
                         <span>{this.props.for === 'departure' ? 'Departure date': 'Return date'}</span>
                     </section>
+
                     <DatePicker 
                         getSelectedDate={this.getSelectedDate} 
                         for={this.props.for}
