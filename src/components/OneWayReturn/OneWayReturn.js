@@ -24,7 +24,9 @@ class OneWayReturn extends Component{
         console.log(this.state);
             
         return(
-            <div className={classes.OneWayReturn}>
+            <div 
+                className={classes.OneWayReturn}
+                role="radiogroup">
                 <Input
                     elementType="radio"
                     id="oneWay"

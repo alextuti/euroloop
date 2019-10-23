@@ -21,37 +21,39 @@ class Input extends Component{
                             id={this.props.id}
                             value={this.props.value}
                             onClick={this.props.clicked}
-                            checked={this.props.checked}/>
+                            checked={this.props.checked}
+                            role="radio"
+                            aria-checked={this.props.checked}
+                            aria-label={this.props.labelText + 'journey'}/>
                         <label
                             className={classes.RadioInputLabel}
-                            for={this.props.id}>{this.props.labelText}</label>    
+                            htmlFor={this.props.id}
+                            aria-hidden="true">{this.props.labelText}</label>    
                     </div>;
                 break;
             
             case 'text':
                 inputElement = 
-                    <div 
-                        className={classes.TextInputContainer}
+                    <input 
+                        className={[
+                            classes.TextInput,
+                            classes[this.props.textPosition],
+                            classes[this.props.position],
+                            classes[this.props.icon]].join(' ')}
                         style={{
                             transform: this.props.show ? 'translateY(0)' : 'translateY(-180vh)',
                             opacity: this.props.show ? '1' : '0'
-                        }}>
-                        <input 
-                            className={[
-                                classes.TextInput,
-                                classes[this.props.textPosition],
-                                classes[this.props.position],
-                                classes[this.props.icon]].join(' ')}
-                            role="button"
-                            aria-label={this.props.ariaLabel}
-                            type={this.props.elementType}
-                            name={this.props.name}
-                            id={this.props.id}
-                            value={this.props.value}
-                            onClick={this.props.clicked}
-                            onKeyDown={this.props.clicked}
-                            readOnly />
-                    </div>;
+                        }}
+                        tabIndex={this.props.tabIndex}
+                        role="button"
+                        aria-label={this.props.ariaLabel}
+                        type={this.props.elementType}
+                        name={this.props.name}
+                        id={this.props.id}
+                        value={this.props.value}
+                        onClick={this.props.clicked}
+                        onKeyDown={this.props.clicked}
+                        readOnly />;
                 break;
             
             case 'hidden':

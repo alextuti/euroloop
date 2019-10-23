@@ -48,15 +48,14 @@ class SearchInput extends Component{
             return (
                 <ul 
                     className={classes.RecommendationList}
-                    ref={this.suggestionListRef}
                     id={"recommendationList"+this.props.id}
                     role="listbox"
                     style={{
-                        width: this.state.onChange && window.visualViewport.width < 1024 ? '100%' : `${document.getElementById('departure').offsetWidth}px`,
-                        height: this.state.onChange && window.visualViewport.width < 1024 ? '100%' : '240px',
-                        overflowY: this.state.onChange && window.visualViewport.width < 1024 ? 'unset': 'scroll',
-                        paddingTop: this.state.onChange && window.visualViewport.width < 1024 ? '5%' : '5px',
-                        left: this.state.onChange && window.visualViewport.width < 1024  ? '0' : 'unset'
+                        width: this.state.onChange && window.screen.width < 1024 ? '100%' : `${document.getElementById('departure').offsetWidth}px`,
+                        height: this.state.onChange && window.screen.width < 1024 ? '100%' : '240px',
+                        overflowY: this.state.onChange && window.screen.width < 1024 ? 'unset': 'scroll',
+                        paddingTop: this.state.onChange && window.screen.width < 1024 ? '5%' : '5px',
+                        left: this.state.onChange && window.screen.width < 1024  ? '0' : 'unset'
                     }}>
                     {suggestions.map((suggestion, index) => 
                         <li
@@ -86,15 +85,15 @@ class SearchInput extends Component{
                 aria-controls={"recommendationList" + this.props.id}
                 aria-expanded={this.state.onChange}
                 style={{
-                    position: this.state.onChange && window.visualViewport.width < 1024 ? 'fixed' : 'relative',
-                    top: this.state.onChange && window.visualViewport.width < 1024 ? '0' : 'initial',
-                    zIndex: this.state.onChange && window.visualViewport.width < 1024 ? '2500' : 'initial'
+                    position: this.state.onChange && window.screen.width < 1024 ? 'fixed' : 'relative',
+                    top: this.state.onChange && window.screen.width < 1024 ? '0' : 'initial',
+                    zIndex: this.state.onChange && window.screen.width < 1024 ? '2500' : 'initial'
                 }}>
                 <label 
                     htmlFor={this.props.id} 
                     className={classes.Label}
                     style={{
-                        transform: this.state.onChange && window.visualViewport.width < 1024 ? 'translateY(-180vh)': 'translateY(0)'
+                        transform: this.state.onChange && window.screen.width < 1024 ? 'translateY(-180vh)': 'translateY(0)'
                     }}>{this.props.labelName}</label>
                 <input 
                     className={classes.SearchInput} 
@@ -106,13 +105,13 @@ class SearchInput extends Component{
                     aria-autocomplete="list"
                     aria-activedescendant="suggestionsOption0"
                     style={{
-                        borderRadius: this.state.onChange && window.visualViewport.width < 1024 ? '0' : '6px',
+                        borderRadius: this.state.onChange && window.screen.width < 1024 ? '0' : '6px',
                         borderBottomLeftRadius: this.state.onChange ? '0px': '6px',
                         borderBottomRightRadius:this.state.onChange ? '0px': '6px',
-                        position: this.state.onChange && window.visualViewport.width < 1024  ? 'fixed': 'relative',
-                        zIndex: this.state.onChange && window.visualViewport.width < 1024  ? '2500': 'unset',
-                        top: this.state.onChange && window.visualViewport.width < 1024  ? '0' : 'none',
-                        left: this.state.onChange && window.visualViewport.width < 1024  ? '0' : 'unset'
+                        position: this.state.onChange && window.screen.width < 1024  ? 'fixed': 'relative',
+                        zIndex: this.state.onChange && window.screen.width < 1024  ? '2500': 'unset',
+                        top: this.state.onChange && window.screen.width < 1024  ? '0' : 'none',
+                        left: this.state.onChange && window.screen.width < 1024  ? '0' : 'unset'
                     }}/>
                 {this.renderSuggestions()}
             </div>

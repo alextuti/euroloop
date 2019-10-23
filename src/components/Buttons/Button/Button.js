@@ -18,6 +18,7 @@ class Button extends Component{
                 id={this.props.id}
                 role={this.props.role}
                 aria-label={this.props.ariaLabel}
+                aria-hidden={this.props.ariaHidden}
                 style={{
                     transform: this.props.show ? 'translateY(0)' : 'translateY(-100vh)',
                     opacity: this.props.show ? '1':'0'

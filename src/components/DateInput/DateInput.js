@@ -12,6 +12,7 @@ class DateInput extends Component{
         inputClicked: false,
         currentDate: null,
         confirmedDate: new Date().toLocaleString('en-GB', {year: 'numeric', month: 'numeric', day: 'numeric'}),
+        confirmedDateRaw: new Date()
     }
 
     inputClickedHandler = () =>{
@@ -31,7 +32,7 @@ class DateInput extends Component{
     confirmDateHandler = (e) =>{
         e.preventDefault();
         if(this.state.currentDate){
-            this.setState({confirmedDate: this.state.currentDate.toString()})
+            this.setState({confirmedDate: this.state.currentDate.toString(), confirmedDateRaw: this.state.currentDate})
         }
         this.cancelButtonHandler(e);
     }
@@ -41,11 +42,13 @@ class DateInput extends Component{
     }
 
     render(){
-        console.log(this.state);
+        console.log();
         
         return(
             <div 
                 className={[classes.DateInput, this.props.for === 'departure' ? classes.Departure : classes.Return].join(' ')}
+                aria-hidden={!this.props.show}
+                tabIndex="-1"
                 style={{
                     opacity: this.props.show ? '1' : '0'
                 }}>
@@ -58,10 +61,14 @@ class DateInput extends Component{
                     show={this.props.show}
                     textPosition="RightAlignedText"
                     position={this.props.position}
+                    ariaHidden={!this.props.show}
+                    tabIndex={this.props.show ? '0' : '-1'}
+                    ariaLabel={`Current ${this.props.for} date: ${this.state.confirmedDateRaw.toLocaleString('en-GB', {year: 'numeric', month: 'long', day: 'numeric'})}, open to change`}
                     icon="Calendar" />
                 <section 
                     className={classes.DatePickerContainer}
-                    aria-label="Calendar"
+                    role="presentation"
+                    aria-hidden={!this.props.show}
                     style={{
                         // transform: this.state.inputClicked ? 'translateY(0)' : 'translateY(-180vh)',
                         // opacity: this.state.inputClicked ? '1':'0'
@@ -75,12 +82,15 @@ class DateInput extends Component{
                     </section>
                     <DatePicker 
                         getSelectedDate={this.getSelectedDate} 
-                        for={this.props.for} 
+                        for={this.props.for}
+                        ariaHidden={!this.props.show}
+                        inputClicked={this.state.inputClicked} 
                         confirmedDate={this.state.confirmedDate}/>
                     <Button 
                         btnType="Confirm" 
                         clicked={this.confirmDateHandler}
                         disabled={!this.state.currentDate}
+                        ariaHidden={!this.props.show}
                         show>CONFIRM</Button>
                 </section>
             </div>

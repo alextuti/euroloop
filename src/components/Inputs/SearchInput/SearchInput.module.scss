@@ -55,11 +55,7 @@
     .RecommendationListItem{
         padding: 0 5%;
         line-height: 40px;
-
-        &:focus{
-            background: cadetblue;
-        }
-
+        
         span{
             align-self: center;
             font-weight: 600;

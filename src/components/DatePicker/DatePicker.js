@@ -39,22 +39,36 @@ class DatePicker extends Component{
         let firstDay = new Date(this.state.currentDate.getFullYear(), this.state.currentDate.getMonth(), 1).getDay() === 0 ? 7: new Date(this.state.currentDate.getFullYear(), this.state.currentDate.getMonth(), 1).getDay();
         let lastDay = new Date(this.state.currentDate.getFullYear(), this.state.currentDate.getMonth()+1, -1).getDate()
 
+        const getCurrentDate = (day) =>{
+            return new Date(this.state.currentDate.getFullYear(), this.state.currentDate.getMonth(), day);
+        }
+
+        const getWeekDay = (day) =>{
+            let weekdays = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
+            let weekDayNumber = new Date(this.state.currentDate.getFullYear(), this.state.currentDate.getMonth(), day - 1).getDay();
+            return weekdays[weekDayNumber];
+        }
+
         // This array holds objects that represent the dates in the calendar for the current month/year
         let calendarDaysArray=[];
         for(let i=1; i<43; i++){
+            let currentDay = i - firstDay + 1;
             if(i<firstDay || i>lastDay + firstDay){
                 calendarDaysArray.push({
                     // The empty sloths' key is composed of the current month/year + a unique number (the iterator)
                     key: currentMonth + currentYear + i,
                     dayNumber: null,
-                    disabled: true
+                    disabled: true,
+                    ariaHidden: !this.props.inputClicked
                 })
             }else{
                 calendarDaysArray.push({
                     // The key is the date itself as there are no two identical dates possible
-                    key: new Date(this.state.currentDate.getFullYear(), this.state.currentDate.getMonth(), i-firstDay+1),
-                    dayNumber: i - firstDay + 1,
-                    disabled: false
+                    key: getCurrentDate(currentDay),
+                    dayNumber: currentDay,
+                    disabled: false,
+                    ariaHidden: false,
+                    ariaLabel: `${currentDay}, ${getWeekDay(currentDay)} ${currentMonth + ' ' + currentYear}`
                 })
             }
         }
@@ -65,12 +79,18 @@ class DatePicker extends Component{
                 clicked={(event) => this.dateClickedHandler(event, element.key)}
                 key={element.key}
                 disabled={element.disabled}
+                ariaHidden={element.ariaHidden}
+                ariaLabel={element.ariaLabel}
                 focus={this.props.confirmedDate === element.key.toLocaleString('en-GB', {day: 'numeric', month: 'numeric', year: 'numeric'})}
                 show>{element.dayNumber}</Button>
         });   
 
         return(
-            <div className={classes.DatePicker}>
+            <div 
+                className={classes.DatePicker}
+                role="application"
+                aria-label={`${this.props.for} Calendar, current month: ${currentMonth + ' ' + currentYear}`}
+                aria-hidden={this.props.ariaHidden}>
                 <section className={classes.Header}>
                     <Button 
                         btnType="Customizable"
@@ -80,7 +100,7 @@ class DatePicker extends Component{
                         show><img src={arrow} style={{transform: 'rotate(180deg)'}} alt="arrow left"></img></Button>
                     <header 
                         className={classes.Title}
-                        aria-label={"Current month, " + currentMonth + ' ' + currentYear}>{currentMonth} {currentYear}</header>
+                        aria-hidden="true">{currentMonth} {currentYear}</header>
                     <Button 
                         btnType="Customizable"
                         clicked={this.monthForwardHandler}
@@ -88,7 +108,9 @@ class DatePicker extends Component{
                         ariaLabel={"Next month, " + nextMonth.toLocaleString('default', {month: 'long'}) + ' ' + nextMonth.toLocaleString('default', {year: 'numeric'}) }
                         show><img src={arrow} alt="arrow right"></img></Button>
                 </section>
-                <ul className={classes.WeekDaysList}>
+                <ul 
+                    className={classes.WeekDaysList}
+                    aria-hidden="true">
                         <li>Mon</li>
                         <li>Tue</li>
                         <li>Wed</li>
@@ -97,7 +119,8 @@ class DatePicker extends Component{
                         <li>Sat</li>
                         <li>Sun</li>
                 </ul>
-                <div className={classes.DaysContainer}>
+                <div 
+                    className={classes.DaysContainer}>
                     {calendarDays}
                 </div>
             </div>
