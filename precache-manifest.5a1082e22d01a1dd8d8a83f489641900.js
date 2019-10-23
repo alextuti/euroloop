@@ -1,18 +1,18 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "2ec335556776ab464a2938445a6be057",
+    "revision": "2e3a1cdf956f258273b4f80d4e50d78d",
     "url": "/euroloop/index.html"
   },
   {
-    "revision": "287cd7c2cd1d4e581f5a",
-    "url": "/euroloop/static/css/main.170e6f27.chunk.css"
+    "revision": "9c8fc6adfb576c8b7812",
+    "url": "/euroloop/static/css/main.c7b13842.chunk.css"
   },
   {
     "revision": "a0e0056174e66700286d",
     "url": "/euroloop/static/js/2.8b9e3a23.chunk.js"
   },
   {
-    "revision": "287cd7c2cd1d4e581f5a",
+    "revision": "9c8fc6adfb576c8b7812",
     "url": "/euroloop/static/js/main.cc7a7a6b.chunk.js"
   },
   {
