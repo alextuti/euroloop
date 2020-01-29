@@ -44,16 +44,17 @@ class App extends Component {
           returnDate={this.getReturnDate}
           submitted={this.submittedHandler}
         />
-        {this.state.formSubmitted &&
-        new Date(this.state.departureDateSubmitted).getTime() <=
+        {this.state.formSubmitted ? (
+          new Date(this.state.departureDateSubmitted).getTime() <=
           new Date(this.state.returnDateSubmitted).getTime() ? (
-          <Results
-            departureStation={this.state.departureStationSubmitted}
-            arrivalStation={this.state.arrivalStationSubmitted}
-          />
-        ) : (
-          alert("The departure date has to be before the return date")
-        )}
+            <Results
+              departureStation={this.state.departureStationSubmitted}
+              arrivalStation={this.state.arrivalStationSubmitted}
+            />
+          ) : (
+            alert("The departure date has to be before the return date")
+          )
+        ) : null}
       </div>
     );
   }
