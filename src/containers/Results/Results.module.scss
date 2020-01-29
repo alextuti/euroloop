@@ -1,0 +1,17 @@
+.Results {
+  width: 700px;
+  margin: 0 auto;
+  padding-bottom: 32px;
+}
+
+@media screen and (max-width: 768px) {
+  .Results {
+    width: 500px;
+  }
+}
+
+@media screen and (max-width: 560px) {
+  .Results {
+    width: 300px;
+  }
+}

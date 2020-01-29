@@ -1,0 +1,44 @@
+@import "../../styles/variables.module.scss";
+
+.Result {
+  background: $light-color;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 16px;
+  padding: $small-font;
+  border-radius: $border-radius;
+  box-shadow: $shadow;
+}
+
+.Result__TripTimes {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 300px;
+}
+
+.Result__TripTimes time {
+  font-size: $large-font;
+  font-weight: bold;
+}
+
+.Result__TripTimes p {
+  font-size: $small-font;
+}
+
+.Result__Price {
+  font-size: $large-font;
+  font-weight: bold;
+}
+
+.Result__Hourglass {
+  height: 16px;
+}
+
+@media screen and (max-width: 560px) {
+  .Result__TripTimes {
+    width: 200px;
+  }
+}
